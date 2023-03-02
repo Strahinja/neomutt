@@ -49,42 +49,34 @@ void sb_win_remove_observers(struct MuttWindow *win);
 static bool calc_divider(struct SidebarWindowData *wdata)
 {
   enum DivType type = SB_DIV_USER;
+  bool changed = false;
   const char *const c_sidebar_divider_char = cs_subset_string(NeoMutt->sub, "sidebar_divider_char");
 
   // Calculate the width of the delimiter in screen cells
   int width = mutt_strwidth(c_sidebar_divider_char);
+  if (width < 1)
+  {
+    type = SB_DIV_ASCII;
+    goto done;
+  }
 
   const bool c_ascii_chars = cs_subset_bool(NeoMutt->sub, "ascii_chars");
-  if (c_ascii_chars)
+  if (c_ascii_chars || !CharsetIsUtf8)
   {
-    if (width < 1) // empty or bad
+    const size_t len = mutt_str_len(c_sidebar_divider_char);
+    for (size_t i = 0; i < len; i++)
     {
-      type = SB_DIV_ASCII;
-      width = 1;
-    }
-    else
-    {
-      for (size_t i = 0; i < width; i++)
+      if (c_sidebar_divider_char[i] & ~0x7F) // high-bit is set
       {
-        if (c_sidebar_divider_char[i] & ~0x7F) // high-bit is set
-        {
-          type = SB_DIV_ASCII;
-          width = 1;
-          break;
-        }
+        type = SB_DIV_ASCII;
+        width = 1;
+        break;
       }
     }
   }
-  else
-  {
-    if (width < 1) // empty or bad
-    {
-      type = SB_DIV_UTF8;
-      width = 1;
-    }
-  }
 
-  const bool changed = (width != wdata->divider_width);
+done:
+  changed = (width != wdata->divider_width);
 
   wdata->divider_type = type;
   wdata->divider_width = width;
@@ -219,6 +211,7 @@ static int sb_color_observer(struct NotifyCallback *nc)
   {
     case MT_COLOR_INDICATOR:
     case MT_COLOR_NORMAL:
+    case MT_COLOR_SIDEBAR_BACKGROUND:
     case MT_COLOR_SIDEBAR_DIVIDER:
     case MT_COLOR_SIDEBAR_FLAGGED:
     case MT_COLOR_SIDEBAR_HIGHLIGHT:
@@ -333,8 +326,8 @@ static int sb_config_observer(struct NotifyCallback *nc)
   {
     struct SidebarWindowData *wdata = sb_wdata_get(win);
     calc_divider(wdata);
-    win->actions |= WA_REPAINT;
-    mutt_debug(LL_DEBUG5, "config done, request WA_REPAINT\n");
+    win->actions |= WA_RECALC;
+    mutt_debug(LL_DEBUG5, "config done, request WA_RECALC\n");
     return 0;
   }
 

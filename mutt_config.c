@@ -141,6 +141,9 @@ static int reply_validator(const struct ConfigSet *cs, const struct ConfigDef *c
   return CSR_ERR_INVALID;
 }
 
+/**
+ * MainVars - General Config definitions for NeoMutt
+ */
 static struct ConfigDef MainVars[] = {
   // clang-format off
   { "abort_backspace", DT_BOOL, true, 0, NULL,
@@ -161,7 +164,7 @@ static struct ConfigDef MainVars[] = {
   { "assumed_charset", DT_SLIST|SLIST_SEP_COLON|SLIST_ALLOW_EMPTY, 0, 0, charset_slist_validator,
     "If a message is missing a character set, assume this character set"
   },
-  { "attach_format", DT_STRING|DT_NOT_EMPTY, IP "%u%D%I %t%4n %T%.40d%> [%.7m/%.10M, %.6e%?C?, %C?, %s] ", 0, NULL,
+  { "attach_format", DT_STRING|DT_NOT_EMPTY, IP "%u%D%I %t%4n %T%d %> [%.7m/%.10M, %.6e%?C?, %C?, %s] ", 0, NULL,
     "printf-like format string for the attachment menu"
   },
   { "attach_save_dir", DT_PATH|DT_PATH_DIR, IP "./", 0, NULL,
@@ -631,6 +634,9 @@ static struct ConfigDef MainVars[] = {
 #else
 #define MIXMASTER_DEFAULT ""
 #endif
+/**
+ * MainVarsMixmaster - Config definitions for the Mixmaster library
+ */
 static struct ConfigDef MainVarsMixmaster[] = {
   // clang-format off
   { "mix_entry_format", DT_STRING|DT_NOT_EMPTY, IP "%4n %c %-16s %a", 0, NULL,
@@ -645,6 +651,9 @@ static struct ConfigDef MainVarsMixmaster[] = {
 #endif
 
 #if defined(HAVE_LIBIDN)
+/**
+ * MainVarsIdn - IDN Config definitions for the Mixmaster library
+ */
 static struct ConfigDef MainVarsIdn[] = {
   // clang-format off
   { "idn_decode", DT_BOOL|R_MENU, true, 0, NULL,
