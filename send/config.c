@@ -196,10 +196,10 @@ static struct ConfigDef SendVars[] = {
   { "forward_attachments", DT_QUAD, MUTT_ASKYES, 0, NULL,
     "Forward attachments when forwarding a message"
   },
-  { "forward_attribution_intro", DT_STRING, IP "----- Forwarded message from %f -----", 0, NULL,
+  { "forward_attribution_intro", DT_STRING|DT_L10N_STRING, IP "----- Forwarded message from %f -----", 0, NULL,
     "Prefix message for forwarded messages"
   },
-  { "forward_attribution_trailer", DT_STRING, IP "----- End forwarded message -----", 0, NULL,
+  { "forward_attribution_trailer", DT_STRING|DT_L10N_STRING, IP "----- End forwarded message -----", 0, NULL,
     "Suffix message for forwarded messages"
   },
   { "forward_decrypt", DT_BOOL, true, 0, NULL,

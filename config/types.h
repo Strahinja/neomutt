@@ -52,6 +52,7 @@
 #define DT_INHERIT_MBOX  (1 << 12) ///< Config item can be Mailbox-specific
 #define DT_PATH_DIR      (1 << 13) ///< Path is a directory
 #define DT_PATH_FILE     (1 << 14) ///< Path is a file
+#define DT_L10N_STRING   (1 << 15) ///< Localizable string
 
 #define IS_SENSITIVE(x) (((x).type & DT_SENSITIVE) == DT_SENSITIVE)
 #define IS_MAILBOX(x)   (((x)->type & (DT_STRING | DT_MAILBOX)) == (DT_STRING | DT_MAILBOX))

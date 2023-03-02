@@ -304,7 +304,7 @@
 ** NeoMutt will operate on the attachments one by one.
 */
 
-{ "attribution_intro", DT_STRING, "On %d, %n wrote:" },
+{ "attribution_intro", DT_STRING|DT_L10N_STRING, "On %d, %n wrote:" },
 /*
 ** .pp
 ** This is the string that will precede a replied-to message which is
@@ -3835,7 +3835,7 @@
 ** Also see $$wrap.
 */
 
-{ "reply_regex", DT_REGEX, "^((re|aw|sv)(\\[[0-9]+\\])*:[ \t]*)*" },
+{ "reply_regex", DT_REGEX|DT_L10N_STRING, "^((re|aw|sv)(\\[[0-9]+\\])*:[ \t]*)*" },
 /*
 ** .pp
 ** A regular expression used to recognize reply messages when threading
@@ -5105,7 +5105,7 @@
 ** .de
 */
 
-{ "status_format", DT_STRING, "-%r-NeoMutt: %D [Msgs:%?M?%M/?%m%?n? New:%n?%?o? Old:%o?%?d? Del:%d?%?F? Flag:%F?%?t? Tag:%t?%?p? Post:%p?%?b? Inc:%b?%?l? %l?]---(%?T?%T/?%s/%S)-%>-(%P)---" },
+{ "status_format", DT_STRING|DT_L10N_STRING, "-%r-NeoMutt: %D [Msgs:%?M?%M/?%m%?n? New:%n?%?o? Old:%o?%?d? Del:%d?%?F? Flag:%F?%?t? Tag:%t?%?p? Post:%p?%?b? Inc:%b?%?l? %l?]---(%?T?%T/?%s/%S)-%>-(%P)---" },
 /*
 ** .pp
 ** Controls the format of the status line displayed in the "index"
@@ -5356,7 +5356,7 @@
 ** Most terminal emulators emulate the status line in the window title.
 */
 
-{ "ts_icon_format", DT_STRING, "M%?n?AIL&ail?" },
+{ "ts_icon_format", DT_STRING|DT_L10N_STRING, "M%?n?AIL&ail?" },
 /*
 ** .pp
 ** Controls the format of the icon title, as long as "$$ts_enabled" is set.
@@ -5364,7 +5364,7 @@
 ** "$$status_format".
 */
 
-{ "ts_status_format", DT_STRING, "NeoMutt with %?m?%m messages&no messages?%?n? [%n NEW]?" },
+{ "ts_status_format", DT_STRING|DT_L10N_STRING, "NeoMutt with %?m?%m messages&no messages?%?n? [%n NEW]?" },
 /*
 ** .pp
 ** Controls the format of the terminal status line (or window title),
@@ -5616,5 +5616,5 @@
 ** name of original article author) to article that followuped to newsgroup.
 */
 #endif
-// clang-format on
-/*--*/
+    // clang-format on
+    /*--*/

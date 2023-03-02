@@ -39,5 +39,6 @@ void                  mutt_opts_free         (void);
 enum CommandResult    mutt_parse_rc_buffer   (struct Buffer *line, struct Buffer *token, struct Buffer *err);
 enum CommandResult    mutt_parse_rc_line     (const char *line, struct Buffer *err);
 int                   mutt_query_variables   (struct ListHead *queries, bool show_docs);
+void                  translate_config       (struct ConfigSubset **ptr);
 
 #endif /* MUTT_INIT_H */
